@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
-
 // CSS의 position는 문서에서 어떻게 요소를 배치할 것인지를 결정하는 속성이다
-export default function Position() {
+const Position = () => {
     return (
         <div style={{
             backgroundColor: "gray",
@@ -136,3 +135,4 @@ export default function Position() {
     )
 }
 
+export default Position;
