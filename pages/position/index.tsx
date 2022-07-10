@@ -107,7 +107,7 @@ const Position = () => {
                             fontWeight: "bold",
                             fontSize: "30px"
                         }}>
-                            Absolute
+                            Absolute2
                         </div>
                         static 3에 포함됐지만 relative 2를 자신의 상위 요소로 삼는 것을 확인 할 수 있다.
                     </div>
