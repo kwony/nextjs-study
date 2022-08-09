@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "../../node_modules/next/router";
+import { useSelector } from '../../store'
+
 import axios from "axios";
 
 const Scroll = () => {
@@ -10,14 +12,13 @@ const Scroll = () => {
         title: string,
     }
 
-    const [data, setData] = useState<Array<number>>([])
     const [books, setBooks] = useState<Array<book>>([])
+    const restorePage = useSelector((state) => state.restorePage.path)
     const router = useRouter()
 
     useEffect(() => {
         const value = JSON.parse(sessionStorage.getItem(booksKey()))
-
-        if (value !== undefined && value.length > 0) {
+        if (restorePage === router.asPath && value !== null && value.length > 0) {
             setBooks(value)
         } else {
             axios.get('https://api.itbook.store/1.0/new')
@@ -28,8 +29,10 @@ const Scroll = () => {
     }, [])
 
     useEffect(() => {
-        const scroll = parseInt(sessionStorage.getItem(scrollKey()), 10)
-        window.scrollTo(0, scroll)
+        if (restorePage === router.asPath) {
+            const scroll = parseInt(sessionStorage.getItem(scrollKey()), 10)
+            window.scrollTo(0, scroll)
+        }
     }, [books])
 
 

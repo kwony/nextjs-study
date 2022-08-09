@@ -1,7 +1,17 @@
+import App from 'next/app';
 import '../styles/globals.css'
+import '../lib/useScrollRestoration'
+import { useScrollRestoration } from '../lib/useScrollRestoration'
+import { wrapper } from '../store'
 
-function MyApp({ Component, pageProps }) {
+const MyApp = ({ Component, pageProps, router }) => {
+  useScrollRestoration(router)
   return <Component {...pageProps} />
 }
 
-export default MyApp
+MyApp.getInitialProps = async (context) => {
+  const appInitialProps = await App.getInitialProps(context);
+  return { ...appInitialProps };
+};
+
+export default wrapper.withRedux(MyApp)
